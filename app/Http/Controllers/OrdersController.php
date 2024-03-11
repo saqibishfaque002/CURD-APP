@@ -63,11 +63,9 @@ class OrdersController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Orders $orders, $id)
+    public function destroy(Orders $order)
     {
-        // dd($orders);
-        orders::where('id', $id)->delete();
-        // $orders->delete();
-        return redirect()->route('orders.index');
+        $order->delete();
+        return redirect()->route('orders.index')->with('success', 'Order deleted successfully');
     }
 }

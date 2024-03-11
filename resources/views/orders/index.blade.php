@@ -28,13 +28,11 @@
                             <td>{{ $data->email }}</td>
                             <td>{{ $data->contact }}</td>
                             <td><a href="{{ route('orders.edit', $data->id) }}" class="btn btn-primary m-1">Edit</a>
-                                <a href="{{ route('orders.destroy', $data->id) }}" class="btn btn-primary m-1" onclick="event.preventDefault(); document.getElementById('delete-form-{{ $data->id }}').submit();">
-                                    Delete
-                                </a>
-                                <form id="delete-form-{{ $data->id }}" action="{{ route('orders.destroy', $data->id) }}" method="POST" style="display: none;">
+                                <form action="{{ route('orders.destroy', ['order' => $data->id]) }}" method="POST" onsubmit="return confirm('Are you sure?');">
                                     @csrf
                                     @method('DELETE')
-                                </form>
+                                    <button type="submit" class="btn btn-primary m-1">Delete</button>
+                                </form>                                
                             </td>
                         </tr>
                         @endforeach
